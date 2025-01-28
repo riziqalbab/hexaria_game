@@ -3,20 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-    <title>GAME HEXA</title>
   </head>
   <body>
     <div class="container">
-
-      <div class="boxGame none" id="boxGame">
-        <div class="boxHexa" id="boxHexa">
-
-       </div>
+      <div id="gamebox">
+        <!-- <div class="column">
+                <div class="hexa">
+                    <img class="hexa" src="./img/black.png" alt="">
+                    <span class="nomor_hexa">20</span>
+                </div>
+            </div> -->
       </div>
-      <h1>giliran : <span id="giliran"></span></h1>
+      
+      <div class="boxCurrent">
+        <p>CURRENT: </p>
+        <div class="current">
+            <p id="randomNumber">0</p>
+            <img id="currentHexa" src="./img/blue.png" alt="boxCurrent">
+        </div>
+      </div>
+      <div class="boardScore">
+        <div class="playerBoard">
+          <div>
+            <div class="red"></div>
+            <p>Budi</p>
+          </div>
+          <h2 id="score0">sd</h2>
+        </div>
+        <div class="playerBoard">
+          <div>
+            <div class="red"></div>
+            <p>Budi</p>
+          </div>
+          <h2 id="score0">sd</h2>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
 </html>
-
