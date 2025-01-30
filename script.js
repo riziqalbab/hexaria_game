@@ -2,40 +2,93 @@ const gameBox = document.getElementById("gamebox");
 const PATH_IMAGE = "./img/";
 const elRandomNumber = document.getElementById("randomNumber");
 const currentHexa = document.getElementById("currentHexa");
-
-// MEMBUAT TAMPILAN HEXA
+const elScore0 = document.getElementById("score0");
+const elScore1 = document.getElementById("score1");
 
 class Game {
   /** @param {HTMLDivElement} boxEl  */
-  constructor(boxEl, column, row, elRandomNumber, currentHexa) {
+  constructor(
+    boxEl,
+    column,
+    row,
+    elRandomNumber,
+    currentHexa,
+    elScore0,
+    elScore1,
+    disable = 0
+  ) {
     this.boxEl = boxEl;
     this.column = column;
     this.row = row;
     this.currentTurn = 0;
+    this.elScore0 = elScore0;
+    this.elScore1 = elScore1;
     this.currentHexa = currentHexa;
     this.elRandomNumber = elRandomNumber;
-    this.#handleChange();
+    this.disable = disable;
     this.#createArray();
+    this.#handleChange();
   }
 
+  #handleScore() {
+    const blueScore = this.arrayGame
+      .flat()
+      .filter((item) => item.owner == "blue")
+      .map((item) => {
+        return item.value;
+      })
+      .reduce((prev, curr) => prev + curr, 0);
+    const redScore = this.arrayGame
+      .flat()
+      .filter((item) => item.owner == "red")
+      .map((item) => {
+        return item.value;
+      })
+      .reduce((prev, curr) => prev + curr, 0);
+
+    this.elScore0.innerText = redScore;
+    this.elScore1.innerText = blueScore;
+  }
+
+  /** @param {HTMLDivElement} hexa  */
+  #handleChangeHexa(hexa) {
+    const idHexa = hexa.id;
+    const columnHexa = idHexa.split("-")[0];
+    const rowHexa = parseInt(idHexa.split("-")[1]);
+    const src = hexa.childNodes[1].src;
 
 
+    for (let i = 0; i < 3; i++) {
+      if (columnHexa % 2) {
+        // KOLOM GENAP
+        if (rowHexa + 1 > this.row - 1) continue;
 
-  #handleChange() {
-    this.currentTurn = !this.currentTurn;
-      if(this.currentTurn){
-          this.currentHexa.src = `${PATH_IMAGE}red.png`;
-      } else{
-          this.currentHexa.src = `${PATH_IMAGE}blue.png`;
+        if(this.arrayGame[columnHexa-1+i][rowHexa+1].isActive){
+          console.log(this.arrayGame[columnHexa-1+i][rowHexa+1].owner);
+        }
+
+      } else {
+        // console.log("Ganjil");
       }
+    }
+  }
+
+  /** @param {HTMLDivElement} hexa  */
+  #handleChange(hexa) {
+    this.currentTurn = !this.currentTurn;
+    if (this.currentTurn) {
+      this.currentHexa.src = `${PATH_IMAGE}red.png`;
+    } else {
+      this.currentHexa.src = `${PATH_IMAGE}blue.png`;
+    }
     this.randomNumber = Math.floor(Math.random() * 20) + 1;
     this.elRandomNumber.innerText = this.randomNumber;
-    
+    this.#handleScore();
   }
 
   #createArray() {
     this.elRandomNumber.innerText = this.randomNumber;
-    const n = 5;
+    const n = this.disable;
 
     // const
     this.arrayGame = Array(this.column)
@@ -45,6 +98,7 @@ class Game {
           .fill()
           .map((item) => {
             return {
+              owner: null,
               value: 0,
               isActive: false,
               isDisable: false,
@@ -67,6 +121,8 @@ class Game {
     });
   }
 
+  
+
   /** @param {HTMLDivElement} hexa  */
   #handleClick(hexa) {
     const idHexa = hexa.id;
@@ -81,29 +137,29 @@ class Game {
       ) {
         return;
       } else {
-        console.log(hexa.childNodes[0]);
-
         if (this.currentTurn) {
           hexa.childNodes[1].src = `${PATH_IMAGE}red.png`;
           hexa.childNodes[0].innerText = this.randomNumber;
 
           hexa.childNodes[0].classList.toggle("hidden");
-          
+
           this.arrayGame[columnHexa][rowHexa].isActive = true;
           this.arrayGame[columnHexa][rowHexa].value = this.randomNumber;
+          this.arrayGame[columnHexa][rowHexa].owner = "red";
         } else {
-          this.arrayGame[columnHexa][rowHexa].isActive = true;
           hexa.childNodes[1].src = `${PATH_IMAGE}blue.png`;
           hexa.childNodes[0].innerText = this.randomNumber;
           hexa.childNodes[0].classList.toggle("hidden");
 
+          this.arrayGame[columnHexa][rowHexa].owner = "blue";
+          this.arrayGame[columnHexa][rowHexa].isActive = true;
           this.arrayGame[columnHexa][rowHexa].value = this.randomNumber;
         }
-        
-        this.elRandomNumber.innerText = this.randomNumber;
-    }
-    this.#handleChange(); // <-- random dan mengganti current hexa di htmlnya
 
+        this.elRandomNumber.innerText = this.randomNumber;
+      }
+      this.#handleChange(hexa); // <-- random dan mengganti current hexa di htmlnya
+      this.#handleChangeHexa(hexa); // <-- Mengganti warna musuh jika angka lebih kecil
     });
   }
 
@@ -162,9 +218,9 @@ class Game {
     hexa.append(spanNomorHexa);
     hexa.append(gambar_hexa);
 
-    // HOVER
+    // UNTUK HOVER
     this.#HoverHexa(hexa);
-    // ONCLICK
+    // NGKLIK HEXA
     this.#handleClick(hexa);
     return hexa;
   }
@@ -181,5 +237,15 @@ class Game {
   }
 }
 
-const game1 = new Game(gameBox, 6, 5, elRandomNumber, currentHexa);
+const game1 = new Game(
+  gameBox,
+  5,
+  5,
+  elRandomNumber,
+  currentHexa,
+  elScore0,
+  elScore1,
+  
+);
+
 game1.draw();

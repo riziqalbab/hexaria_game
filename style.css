@@ -5,8 +5,7 @@
 }
 
 .container {
-  height: 100vh;
-  background: 242424;
+  padding-top: 100px;
   width: 100vw;
   background: #242424;
   display: flex;
@@ -26,10 +25,11 @@
   align-items: center;
   justify-content: center;
 }
-.hexa img{
-  filter: drop-shadow(1px 1px white) drop-shadow(1px -1px white) drop-shadow(-1px 1px white) drop-shadow(-1px -1px white);
+.hexa img {
+  filter: drop-shadow(1px 1px white) drop-shadow(1px -1px white)
+    drop-shadow(-1px 1px white) drop-shadow(-1px -1px white);
 }
-.hidden{
+.hidden {
   display: none;
 }
 .hexa span {
@@ -44,49 +44,55 @@
 }
 .column:nth-child(even) {
   margin-left: 48px;
-  margin-top:-26px;
+  margin-top: -26px;
 }
 .column:nth-child(odd) {
   margin-top: -26px;
 }
-.boardScore{
+.boardScore {
   margin-top: 100px;
   gap: 50px;
   display: flex;
 }
-.playerBoard{
+.playerBoard {
   display: flex;
   align-items: center;
   gap: 2px;
   flex-direction: column;
 }
-.playerBoard div{
+.playerBoard div {
   display: flex;
   align-items: center;
   gap: 2px;
 }
-.red{
+.red {
   height: 20px;
   width: 20px;
   background-color: #dd5353;
 }
-.boxCurrent{
+.blue {
+  height: 20px;
+  width: 20px;
+  background-color: #00abb3;
+}
+.boxCurrent {
   margin-top: 30px;
   gap: 10px;
   display: flex;
-  position:relative;
+  position: relative;
   align-items: center;
 }
-.current{
+.current {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.current p{
+.current p {
   position: absolute;
   z-index: 99;
 }
-.current img{
-  filter: drop-shadow(1px 1px white) drop-shadow(1px -1px white) drop-shadow(-1px 1px white) drop-shadow(-1px -1px white);
+.current img {
+  filter: drop-shadow(1px 1px white) drop-shadow(1px -1px white)
+    drop-shadow(-1px 1px white) drop-shadow(-1px -1px white);
   width: 50px;
 }
