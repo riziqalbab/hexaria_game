@@ -51,24 +51,87 @@ class Game {
   }
 
   /** @param {HTMLDivElement} hexa  */
-  #handleChangeHexa(hexa) {
+  #detectHexa(hexa) {
     const idHexa = hexa.id;
-    const columnHexa = idHexa.split("-")[0];
+    const columnHexa = parseInt(idHexa.split("-")[0]);
     const rowHexa = parseInt(idHexa.split("-")[1]);
     const src = hexa.childNodes[1].src;
 
+    const arrayNeighbor = [];
+    // let indexList;
 
-    for (let i = 0; i < 3; i++) {
-      if (columnHexa % 2) {
-        // KOLOM GENAP
-        if (rowHexa + 1 > this.row - 1) continue;
+    // const direction1 = [
+    //   [-1, ]
+    // ]
 
-        if(this.arrayGame[columnHexa-1+i][rowHexa+1].isActive){
-          console.log(this.arrayGame[columnHexa-1+i][rowHexa+1].owner);
-        }
+    const directionsEvenR = [
+      [-1, 0], // Atas kiri
+      [-1, 1], // Atas kanan
+      [0, -1], // Kiri
+      [0, 1], // Kanan
+      [1, 0], // Bawah kiri
+      [1, 1], // Bawah kanan
+    ];
 
-      } else {
-        // console.log("Ganjil");
+    const directionsOddR = [
+      [-1, -1], // Atas kiri
+      [-1, 0], // Atas kanan
+      [0, -1], // Kiri
+      [0, 1], // Kanan
+      [1, -1], // Bawah kiri
+      [1, 0], // Bawah kanan
+    ];
+
+    const direction = !(columnHexa % 2 === 0)
+      ? directionsEvenR
+      : directionsOddR;
+
+    // console.log(direction);
+
+    // const direction = [
+    //   [-1, 0],
+    //   [1, 0],
+    //   [0, -1],
+    //   [0, 1],
+    //   [-1, -1],
+    //   [-1, 1],
+    //   [1, -1],
+    //   [1, 1],
+    // ];
+
+    for (let i = 0; i < direction.length; i++) {
+      const [dx, dy] = direction[i];
+      const nx = rowHexa + dx;
+      const ny = columnHexa + dy;
+
+      if (
+        nx >= 0 &&
+        nx < this.arrayGame.length &&
+        ny >= 0 &&
+        ny < this.arrayGame[rowHexa].length
+      ) {
+        arrayNeighbor.push([nx, ny]);
+      }
+    }
+
+    // console.log(arrayNeighbor);
+
+    this.#changeNeighborHexa(
+      {
+        owner: !this.currentTurn ? "red" : "blue",
+        value: parseInt(hexa.childNodes[0].innerHTML),
+      },
+      arrayNeighbor
+    );
+  }
+
+  /** @param {Array} position  */
+
+  #changeNeighborHexa(click, position) {
+    for (let i = 0; i < position.length; i++) {
+      if (this.arrayGame[position[i][0]][position[i][1]].isActive) {
+        console.log("asd");
+        console.log(this.arrayGame[position[i][0]][position[i][1]]);
       }
     }
   }
@@ -90,7 +153,6 @@ class Game {
     this.elRandomNumber.innerText = this.randomNumber;
     const n = this.disable;
 
-    // const
     this.arrayGame = Array(this.column)
       .fill()
       .map(() =>
@@ -120,8 +182,6 @@ class Game {
       this.arrayGame[col][row].isDisable = true;
     });
   }
-
-  
 
   /** @param {HTMLDivElement} hexa  */
   #handleClick(hexa) {
@@ -159,7 +219,7 @@ class Game {
         this.elRandomNumber.innerText = this.randomNumber;
       }
       this.#handleChange(hexa); // <-- random dan mengganti current hexa di htmlnya
-      this.#handleChangeHexa(hexa); // <-- Mengganti warna musuh jika angka lebih kecil
+      this.#detectHexa(hexa); // <-- Mengganti warna musuh jika angka lebih kecil
     });
   }
 
@@ -230,7 +290,7 @@ class Game {
       const column = document.createElement("div");
       column.setAttribute("class", "column");
       for (let j = 0; j < this.row; j++) {
-        column.append(this.#hexa(this.arrayGame[i][j].isDisable, `${i}-${j}`));
+        column.append(this.#hexa(this.arrayGame[i][j].isDisable, `${j}-${i}`));
       }
       this.boxEl.append(column);
     }
@@ -245,7 +305,7 @@ const game1 = new Game(
   currentHexa,
   elScore0,
   elScore1,
-  
+  0
 );
 
 game1.draw();
