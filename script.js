@@ -4,6 +4,22 @@ const elRandomNumber = document.getElementById("randomNumber");
 const currentHexa = document.getElementById("currentHexa");
 const elScore0 = document.getElementById("score0");
 const elScore1 = document.getElementById("score1");
+const splashcreen = document.getElementById("splashcreen")
+const container = document.getElementById("container");
+
+
+function mulai(){
+
+  setTimeout(() => {
+    splashcreen.classList.toggle("hidden")
+    // container.classList.toggle('hidden');
+  }, 1000);
+
+}
+
+mulai()
+
+
 
 class Game {
   /** @param {HTMLDivElement} boxEl  */
@@ -53,8 +69,8 @@ class Game {
   /** @param {HTMLDivElement} hexa  */
   #detectHexa(hexa) {
     const idHexa = hexa.id;
-    const columnHexa = parseInt(idHexa.split("-")[0]);
-    const rowHexa = parseInt(idHexa.split("-")[1]);
+    const columnHexa = parseInt(idHexa.split("-")[1]);
+    const rowHexa = parseInt(idHexa.split("-")[0]);
     const src = hexa.childNodes[1].src;
 
     const arrayNeighbor = [];
@@ -82,22 +98,7 @@ class Game {
       [1, 0], // Bawah kanan
     ];
 
-    const direction = !(columnHexa % 2 === 0)
-      ? directionsEvenR
-      : directionsOddR;
-
-    // console.log(direction);
-
-    // const direction = [
-    //   [-1, 0],
-    //   [1, 0],
-    //   [0, -1],
-    //   [0, 1],
-    //   [-1, -1],
-    //   [-1, 1],
-    //   [1, -1],
-    //   [1, 1],
-    // ];
+    const direction = !(rowHexa % 2 === 0) ? directionsEvenR : directionsOddR;
 
     for (let i = 0; i < direction.length; i++) {
       const [dx, dy] = direction[i];
@@ -114,8 +115,6 @@ class Game {
       }
     }
 
-    // console.log(arrayNeighbor);
-
     this.#changeNeighborHexa(
       {
         owner: !this.currentTurn ? "red" : "blue",
@@ -128,10 +127,29 @@ class Game {
   /** @param {Array} position  */
 
   #changeNeighborHexa(click, position) {
+    // console.log(position);
     for (let i = 0; i < position.length; i++) {
       if (this.arrayGame[position[i][0]][position[i][1]].isActive) {
-        console.log("asd");
-        console.log(this.arrayGame[position[i][0]][position[i][1]]);
+        console.log(position[i]);
+
+        if (
+          this.arrayGame[position[i][0]][position[i][1]].owner != click.owner &&
+          this.arrayGame[position[i][0]][position[i][1]].value < click.value
+        ) {
+          document.getElementById(
+            `${position[i][0]}-${position[i][1]}`
+          ).childNodes[1].src = `${PATH_IMAGE}${click.owner}.png`;
+
+          this.arrayGame[position[i][0]][position[i][1]].owner = click.owner;          
+        } else if(this.arrayGame[position[i][0]][position[i][1]].owner == click.owner){
+          this.arrayGame[position[i][0]][position[i][1]].value += 1;          
+          document.getElementById(
+            `${position[i][0]}-${position[i][1]}`
+          ).childNodes[0].innerText = parseInt(document.getElementById(
+            `${position[i][0]}-${position[i][1]}`
+          ).childNodes[0].innerText) + 1;
+
+        }  
       }
     }
   }
@@ -186,14 +204,14 @@ class Game {
   /** @param {HTMLDivElement} hexa  */
   #handleClick(hexa) {
     const idHexa = hexa.id;
-    const columnHexa = idHexa.split("-")[0];
-    const rowHexa = idHexa.split("-")[1];
+    const columnHexa = idHexa.split("-")[1];
+    const rowHexa = idHexa.split("-")[0];
     const src = hexa.childNodes[1].src;
 
     hexa.addEventListener("click", (e) => {
       if (
-        this.arrayGame[columnHexa][rowHexa].isActive ||
-        this.arrayGame[columnHexa][rowHexa].isDisable
+        this.arrayGame[rowHexa][columnHexa].isActive ||
+        this.arrayGame[rowHexa][columnHexa].isDisable
       ) {
         return;
       } else {
@@ -203,17 +221,19 @@ class Game {
 
           hexa.childNodes[0].classList.toggle("hidden");
 
-          this.arrayGame[columnHexa][rowHexa].isActive = true;
-          this.arrayGame[columnHexa][rowHexa].value = this.randomNumber;
-          this.arrayGame[columnHexa][rowHexa].owner = "red";
+          this.arrayGame[rowHexa][columnHexa].isActive = true;
+          this.arrayGame[rowHexa][columnHexa].value = this.randomNumber;
+          this.arrayGame[rowHexa][columnHexa].owner = "red";
         } else {
+          console.log(this.currentTurn);
+
           hexa.childNodes[1].src = `${PATH_IMAGE}blue.png`;
           hexa.childNodes[0].innerText = this.randomNumber;
           hexa.childNodes[0].classList.toggle("hidden");
 
-          this.arrayGame[columnHexa][rowHexa].owner = "blue";
-          this.arrayGame[columnHexa][rowHexa].isActive = true;
-          this.arrayGame[columnHexa][rowHexa].value = this.randomNumber;
+          this.arrayGame[rowHexa][columnHexa].owner = "blue";
+          this.arrayGame[rowHexa][columnHexa].isActive = true;
+          this.arrayGame[rowHexa][columnHexa].value = this.randomNumber;
         }
 
         this.elRandomNumber.innerText = this.randomNumber;
@@ -226,14 +246,14 @@ class Game {
   /** @param {HTMLDivElement} hexa  */
   #HoverHexa(hexa) {
     const idHexa = hexa.id;
-    const columnHexa = idHexa.split("-")[0];
-    const rowHexa = idHexa.split("-")[1];
+    const columnHexa = idHexa.split("-")[1];
+    const rowHexa = idHexa.split("-")[0];
     const src = hexa.childNodes[1].src;
 
     hexa.addEventListener("mousemove", (e) => {
       if (
-        this.arrayGame[columnHexa][rowHexa].isActive ||
-        this.arrayGame[columnHexa][rowHexa].isDisable
+        this.arrayGame[rowHexa][columnHexa].isActive ||
+        this.arrayGame[rowHexa][columnHexa].isDisable
       ) {
         return;
       } else {
@@ -247,8 +267,8 @@ class Game {
 
     hexa.addEventListener("mouseout", (e) => {
       if (
-        this.arrayGame[columnHexa][rowHexa].isActive ||
-        this.arrayGame[columnHexa][rowHexa].isDisable
+        this.arrayGame[rowHexa][columnHexa].isActive ||
+        this.arrayGame[rowHexa][columnHexa].isDisable
       ) {
         return;
       } else {
@@ -260,6 +280,7 @@ class Game {
   #hexa(disable, idPosisi, nomor = 0) {
     const hexa = document.createElement("div");
     hexa.setAttribute("class", "hexa");
+
     const gambar_hexa = document.createElement("img");
     hexa.setAttribute("id", idPosisi);
     const spanNomorHexa = document.createElement("span");
@@ -286,11 +307,12 @@ class Game {
   }
 
   draw() {
-    for (let i = 0; i < this.column; i++) {
+    for (let i = 0; i < this.row; i++) {
       const column = document.createElement("div");
       column.setAttribute("class", "column");
-      for (let j = 0; j < this.row; j++) {
-        column.append(this.#hexa(this.arrayGame[i][j].isDisable, `${j}-${i}`));
+
+      for (let j = 0; j < this.column; j++) {
+        column.append(this.#hexa(this.arrayGame[i][j].isDisable, `${i}-${j}`));
       }
       this.boxEl.append(column);
     }
@@ -305,7 +327,7 @@ const game1 = new Game(
   currentHexa,
   elScore0,
   elScore1,
-  0
+  1
 );
 
 game1.draw();
