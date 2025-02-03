@@ -24,7 +24,6 @@
         </ul>
       </div>
     </div>
-
     <div id="competeTo" class="flex">
       <h2>COMPETE WITH</h1>
       <div class="boxSelectPlayer">
@@ -33,17 +32,16 @@
         
         <div class="select">
           <label for="bot">BOT</label>
-          <input type="radio" name="enemy" id="bot" value="bot"/>
+          <input type="radio" name="enemy" id="bot" value="bot" onclick="handlePlayer(this)"/>
         </div>
         <div class="select">
           <label for="player2">PLAYER</label>
-          <input type="radio" name="enemy" id="player2" value="player"/>
+          <input type="radio" name="enemy" id="player2" value="player" onclick="handlePlayer(this)"/>
         </div>
 
       </div>
-      <button type="button" id="competeBtn">OKE</button>
+      <button type="button" disabled id="competeBtn">OKE</button>
     </div>
-
     <div id="multi_player_form" class="hidden player_name">
       <h2>Masukkan Nama Pemain</h2>
       <form>
@@ -56,7 +54,6 @@
           <button type="button">Mulai Permainan</button>
       </form>
     </div>
-
     <div id="single_player_form" class="hidden player_name">
       <h2>Masukkan Nama Pemain</h2>
       <form>
@@ -65,9 +62,31 @@
           <button type="button">Mulai Permainan</button>
       </form>
     </div>
+
+<div id="level_box" class="hidden">
+  <h2>SELECT LEVEL</h1>
+    <br>
+    <div class="boxSelectLevel">
+      <div class="select">
+        <label for="easy">EASY</label>
+        <input type="radio" name="level" id="easy" value="easy" onclick="handleLevel(this)"/>
+      </div>
+      <div class="select">
+        <label for="medium">MEDIUM</label>
+        <input type="radio" name="level" id="medium" value="medium" onclick="handleLevel(this)" />
+      </div>
+      <div class="select">
+        <label for="hard">HARD</label>
+        <input type="radio" name="level" onclick="handleLevel(this)" id="hard" value="hard" />
+      </div>
+
     </div>
+    <br>
+    <button type="button" disabled id="levelBtn">OKE</button>
+  </div>
+</div>
 
-
+    </div>
     <div class="container hidden" id="container">
       <div id="gamebox">
         <!-- <div class="column">
@@ -101,6 +120,9 @@
         </div>
       </div>
     </div>
+
+
+    <script  src="game.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

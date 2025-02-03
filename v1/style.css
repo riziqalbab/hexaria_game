@@ -21,6 +21,14 @@ button:hover {
   box-shadow: 0 6px 15px rgba(255, 117, 140, 0.5);
   transform: translateY(-2px);
 }
+
+button:disabled {
+  background: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
 .player_name {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -82,11 +90,13 @@ form {
   justify-content: center;
 }
 
-.boxSelectPlayer {
+
+.boxSelectPlayer, .boxSelectLevel {
   display: flex;
   flex-direction: row;
   gap: 20px;
 }
+
 
 #instruction {
   animation-name: instructionAnimation;
@@ -165,6 +175,17 @@ form {
   margin-top: 100px;
   gap: 50px;
   display: flex;
+}
+#level_box{
+  color: wheat;
+  font-family: "Courier New", Courier, monospace;
+  background: #242424;
+  width: 100vw;
+  height: 100vh;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .playerBoard {
   display: flex;
