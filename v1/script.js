@@ -4,22 +4,29 @@ const elRandomNumber = document.getElementById("randomNumber");
 const currentHexa = document.getElementById("currentHexa");
 const elScore0 = document.getElementById("score0");
 const elScore1 = document.getElementById("score1");
-const splashcreen = document.getElementById("splashcreen")
+const splashcreen = document.getElementById("splashcreen");
 const container = document.getElementById("container");
 
+const inputPlayer = document.getElementById("player2");
+const inputBot = document.getElementById("bot");
 
-function mulai(){
+const competeBtn = document.getElementById("competeBtn");
 
+
+function start() {
   setTimeout(() => {
-    splashcreen.classList.toggle("hidden")
+    splashcreen.classList.toggle("hidden");
     // container.classList.toggle('hidden');
-  }, 1000);
+    // container.classList.toggle("flex")
+  }, 10);
 
+  competeBtn.addEventListener("click", (e) => {
+    const competeInput = document.querySelector('input[name=enemy]:checked').value
+
+  });
 }
 
-mulai()
-
-
+start();
 
 class Game {
   /** @param {HTMLDivElement} boxEl  */
@@ -31,7 +38,9 @@ class Game {
     currentHexa,
     elScore0,
     elScore1,
-    disable = 0
+    disable = 0,
+    player1,
+    player2
   ) {
     this.boxEl = boxEl;
     this.column = column;
@@ -42,6 +51,8 @@ class Game {
     this.currentHexa = currentHexa;
     this.elRandomNumber = elRandomNumber;
     this.disable = disable;
+    this.player1 = player1
+    this.player2 = player2 
     this.#createArray();
     this.#handleChange();
   }
@@ -140,16 +151,19 @@ class Game {
             `${position[i][0]}-${position[i][1]}`
           ).childNodes[1].src = `${PATH_IMAGE}${click.owner}.png`;
 
-          this.arrayGame[position[i][0]][position[i][1]].owner = click.owner;          
-        } else if(this.arrayGame[position[i][0]][position[i][1]].owner == click.owner){
-          this.arrayGame[position[i][0]][position[i][1]].value += 1;          
+          this.arrayGame[position[i][0]][position[i][1]].owner = click.owner;
+        } else if (
+          this.arrayGame[position[i][0]][position[i][1]].owner == click.owner
+        ) {
+          this.arrayGame[position[i][0]][position[i][1]].value += 1;
           document.getElementById(
             `${position[i][0]}-${position[i][1]}`
-          ).childNodes[0].innerText = parseInt(document.getElementById(
-            `${position[i][0]}-${position[i][1]}`
-          ).childNodes[0].innerText) + 1;
-
-        }  
+          ).childNodes[0].innerText =
+            parseInt(
+              document.getElementById(`${position[i][0]}-${position[i][1]}`)
+                .childNodes[0].innerText
+            ) + 1;
+        }
       }
     }
   }

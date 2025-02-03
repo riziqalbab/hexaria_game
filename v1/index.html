@@ -5,13 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="logo.png" />
   </head>
   <body>
-
     <div id="splashcreen" class="flex">
-      <h1>HELLO WORLD</h1>
+      <img src="logo.png" alt="" />
+      <h1>SELAMAT DATANG</h1>
+      <div id="instruction">
+        <h1>Game Instruction</h1>
+        <ul>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+          <li>Lorem ipsum dolor sit amet.</li>
+        </ul>
+      </div>
     </div>
 
+    <div id="competeTo">
+      <h2>COMPETE WITH</h1>
+      <div class="boxSelectPlayer">
+        
+        
+        
+        <div class="select">
+          <label for="bot">BOT</label>
+          <input type="radio" name="enemy" id="bot" value="bot"/>
+        </div>
+        <div class="select">
+          <label for="player2">PLAYER</label>
+          <input type="radio" name="enemy" id="player2" value="player"/>
+        </div>
+        
+      </div>
+      <button type="button" id="competeBtn">OKE</button>
+    </div>
     <div class="container hidden" id="container">
       <div id="gamebox">
         <!-- <div class="column">

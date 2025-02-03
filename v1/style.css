@@ -2,17 +2,91 @@
   padding: 0;
   margin: 0;
 }
+button{
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(255, 117, 140, 0.3);
+}
+button:hover{
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  box-shadow: 0 6px 15px rgba(255, 117, 140, 0.5);
+  transform: translateY(-2px);
 
-#splashcreen{
-  color: #242424;
+}
+#splashcreen {
+  color: wheat;
+  font-family: "Courier New", Courier, monospace;
+  background: #242424;
   width: 100vw;
   height: 100vh;
   /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#splashcreen img {
+  height: 100px;
+  margin-left: -20px;
+}
+
+.select{
+  display: flex;
+  flex-direction: column;
+}
+
+#competeTo {
+  flex-direction: column;
+  gap: 20px;
+  background: #242424;
+  color: wheat;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.flex{
+.boxSelectPlayer{
+  display: flex;
+  flex-direction: row; 
+  gap: 20px;
+}
+
+#instruction {
+  animation-name: instructionAnimation;
+  animation-duration: 4s;
+}
+
+@keyframes instructionAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#instruction {
+  color: wheat;
+  font-family: "Courier New", Courier, monospace;
+  background: #242424;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex {
   display: flex;
 }
 
@@ -32,8 +106,6 @@
 .hexa {
   position: relative;
   display: flex;
-  /* width: 120px; */
-  /* height: 120px; */
   align-items: center;
   justify-content: center;
 }
