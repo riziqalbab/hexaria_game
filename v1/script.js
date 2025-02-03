@@ -7,23 +7,43 @@ const elScore1 = document.getElementById("score1");
 const splashcreen = document.getElementById("splashcreen");
 const container = document.getElementById("container");
 
-const inputPlayer = document.getElementById("player2");
+
+
+const competePlayerBox = document.getElementById('competeTo');
 const inputBot = document.getElementById("bot");
 
-const competeBtn = document.getElementById("competeBtn");
+const inputSinglePlayer = document.getElementById("single_player");
 
+const inputPlayer1 = document.getElementById("player1");
+const inputPlayer2 = document.getElementById("player2");
+const multiPlayerForm = document.getElementById("multi_player_form");
+const singlePlayerForm = document.getElementById("single_player_form");
+const competeBtn = document.getElementById("competeBtn");
 
 function start() {
   setTimeout(() => {
     splashcreen.classList.toggle("hidden");
-    // container.classList.toggle('hidden');
-    // container.classList.toggle("flex")
   }, 10);
 
-  competeBtn.addEventListener("click", (e) => {
-    const competeInput = document.querySelector('input[name=enemy]:checked').value
 
+  competeBtn.addEventListener("click", (e) => {
+    const competeInput = document.querySelector("input[name=enemy]:checked").value;
+    console.log(competeInput);    
+    namePlayer(competeInput);
   });
+}
+
+function namePlayer(player) {
+  if (player == "bot") {
+    singlePlayerForm.classList.toggle("hidden");
+    competePlayerBox.classList.toggle('hidden');
+
+  } else if (player == "player") {
+    multiPlayerForm.classList.toggle("hidden")
+    competePlayerBox.classList.toggle("hidden")
+  }
+
+  return
 }
 
 start();
@@ -51,8 +71,8 @@ class Game {
     this.currentHexa = currentHexa;
     this.elRandomNumber = elRandomNumber;
     this.disable = disable;
-    this.player1 = player1
-    this.player2 = player2 
+    this.player1 = player1;
+    this.player2 = player2;
     this.#createArray();
     this.#handleChange();
   }

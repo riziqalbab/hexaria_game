@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div id="competeTo">
+    <div id="competeTo" class="flex">
       <h2>COMPETE WITH</h1>
       <div class="boxSelectPlayer">
         
@@ -39,10 +39,35 @@
           <label for="player2">PLAYER</label>
           <input type="radio" name="enemy" id="player2" value="player"/>
         </div>
-        
+
       </div>
       <button type="button" id="competeBtn">OKE</button>
     </div>
+
+    <div id="multi_player_form" class="hidden player_name">
+      <h2>Masukkan Nama Pemain</h2>
+      <form>
+          <label for="player1">Player 1:</label>
+          <input type="text" class="inputPlayer" id="player1" name="player1" required>
+          
+          <label for="player2">Player 2:</label>
+          <input type="text" class="inputPlayer" id="player2" name="player2" required>
+          
+          <button type="button">Mulai Permainan</button>
+      </form>
+    </div>
+
+    <div id="single_player_form" class="hidden player_name">
+      <h2>Masukkan Nama Pemain</h2>
+      <form>
+          <label for="single_player">Player 1:</label>
+          <input type="text" class="inputPlayer" id="single_player" name="player1" required>
+          <button type="button">Mulai Permainan</button>
+      </form>
+    </div>
+    </div>
+
+
     <div class="container hidden" id="container">
       <div id="gamebox">
         <!-- <div class="column">
