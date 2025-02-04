@@ -82,7 +82,7 @@ function start() {
     splashcreen.classList.toggle("hidden");
     document.getElementById("competeTo").classList.toggle("hidden")
     document.getElementById("competeTo").classList.toggle("flex")
-  }, 10);
+  }, 100);
 
 
   competeBtn.addEventListener("click", (e) => {
