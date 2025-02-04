@@ -48,8 +48,8 @@ function startGame(el) {
 
   const game = new Game(
     gameBox,
-    5,
-    5,
+    10,
+    8,
     elRandomNumber,
     currentHexa,
     elScore0,
@@ -58,6 +58,7 @@ function startGame(el) {
     player1Name,
     player2Name,
     elLeaderboard
+    
   );
 
   game.draw();

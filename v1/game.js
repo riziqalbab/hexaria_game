@@ -369,14 +369,18 @@ class Game {
   }
 
   draw() {
-    for (let i = 0; i < this.row; i++) {
+    console.log(this.arrayGame);
+
+    for (let i = 0; i < this.arrayGame.length; i++) {
       const column = document.createElement("div");
       column.setAttribute("class", "column");
 
-      for (let j = 0; j < this.column; j++) {
+      for (let j = 0; j < this.arrayGame[0].length; j++) {
         column.append(this.#hexa(this.arrayGame[i][j].isDisable, `${i}-${j}`));
       }
       this.boxEl.append(column);
     }
+
+    
   }
 }
