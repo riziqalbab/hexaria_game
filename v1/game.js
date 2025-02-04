@@ -9,8 +9,8 @@ class Game {
     elScore0,
     elScore1,
     disable = 0,
-    player1,
-    player2
+    player1Name,
+    player2Name
   ) {
     this.boxEl = boxEl;
     this.column = column;
@@ -21,11 +21,23 @@ class Game {
     this.currentHexa = currentHexa;
     this.elRandomNumber = elRandomNumber;
     this.disable = disable;
-    this.player1 = player1;
-    this.player2 = player2;
+    this.player1Name = player1Name;
+    this.player2Name = player2Name;
     this.#createArray();
     this.#handleChange();
+
+
+    document.getElementById("player1Name").innerText = player1Name
+    document.getElementById("player2Name").innerText = player2Name
+
+    // console.log(this.arrayGame);
+    
+
   }
+
+  
+
+
 
   #handleScore() {
     const blueScore = this.arrayGame
@@ -35,6 +47,10 @@ class Game {
         return item.value;
       })
       .reduce((prev, curr) => prev + curr, 0);
+
+
+
+
     const redScore = this.arrayGame
       .flat()
       .filter((item) => item.owner == "red")
@@ -55,11 +71,7 @@ class Game {
     const src = hexa.childNodes[1].src;
 
     const arrayNeighbor = [];
-    // let indexList;
-
-    // const direction1 = [
-    //   [-1, ]
-    // ]
+    
 
     const directionsEvenR = [
       [-1, 0], // Atas kiri
@@ -107,6 +119,7 @@ class Game {
 
   /** @param {Array} position  */
   #changeNeighborHexa(click, position) {
+
     // console.log(position);
     for (let i = 0; i < position.length; i++) {
       if (this.arrayGame[position[i][0]][position[i][1]].isActive) {
@@ -135,6 +148,8 @@ class Game {
         }
       }
     }
+    this.#handleScore()
+
   }
 
   /** @param {HTMLDivElement} hexa  */
@@ -223,6 +238,7 @@ class Game {
       }
       this.#handleChange(hexa); // <-- random dan mengganti current hexa di htmlnya
       this.#detectHexa(hexa); // <-- Mengganti warna musuh jika angka lebih kecil
+      this.#detectEnd()
     });
   }
 
@@ -289,6 +305,20 @@ class Game {
     return hexa;
   }
 
+  #detectEnd(){
+    const allValuesNotNull = this.arrayGame.every(row => 
+      row.every(obj => obj.isActive || obj.isDisable)
+    );
+
+
+    if(allValuesNotNull){
+      alert("You win")
+    }
+
+
+  }
+  
+
   draw() {
     for (let i = 0; i < this.row; i++) {
       const column = document.createElement("div");
@@ -301,4 +331,5 @@ class Game {
     }
   }
 }
+
 

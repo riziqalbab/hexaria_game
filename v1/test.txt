@@ -1,0 +1,45 @@
+[
+
+    {
+        player1:{
+            name: "budi"
+            score: 1010
+        },
+        player2: {
+            nama: "dsds",
+            score: 232
+        },
+        date: "dfsdf"
+    },
+    {
+        player1:{
+            name: "budi"
+            score: 1010
+        },
+        player2: {
+            nama: "dsds",
+            score: 232
+        }
+    },
+    {
+        player1:{
+            name: "budi"
+            score: 1010
+        },
+        player2: {
+            nama: "dsds",
+            score: 232
+        }
+    }   ,
+]
+
+
+
+
+
+
+
+
+
+
+

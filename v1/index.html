@@ -24,7 +24,7 @@
         </ul>
       </div>
     </div>
-    <div id="competeTo" class="flex">
+    <div id="competeTo" class="hidden">
       <h2>COMPETE WITH</h1>
       <div class="boxSelectPlayer">
         
@@ -51,15 +51,15 @@
           <label for="player2">Player 2:</label>
           <input type="text" class="inputPlayer" id="player2" name="player2" required>
           
-          <button type="button">Mulai Permainan</button>
+          <button type="button" onclick="chooseLevel(this, 'multi')">Lanjut</button>
       </form>
     </div>
     <div id="single_player_form" class="hidden player_name">
-      <h2>Masukkan Nama Pemain</h2>
+      <h2>Lanjut</h2>
       <form>
           <label for="single_player">Player 1:</label>
           <input type="text" class="inputPlayer" id="single_player" name="player1" required>
-          <button type="button">Mulai Permainan</button>
+          <button type="button" onclick="chooseLevel(this, 'single')">Mulai Permainan</button>
       </form>
     </div>
 
@@ -82,7 +82,7 @@
 
     </div>
     <br>
-    <button type="button" disabled id="levelBtn">OKE</button>
+    <button type="button" disabled id="levelBtn" onclick="startGame(this)">MULdfskjdfdfsndfAI</button>
   </div>
 </div>
 
@@ -107,20 +107,21 @@
         <div class="playerBoard">
           <div>
             <div class="red"></div>
-            <p>Budi</p>
+            <p id="player1Name">Budi</p>
           </div>
           <h2 id="score0">sd</h2>
         </div>
         <div class="playerBoard">
           <div>
             <div class="blue"></div>
-            <p>Budi</p>
+            <p id="player2Name">Budi</p>
           </div>
           <h2 id="score1">sd</h2>
         </div>
       </div>
     </div>
 
+    
 
     <script  src="game.js"></script>
     <script src="script.js"></script>
