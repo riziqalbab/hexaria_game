@@ -26,21 +26,18 @@ class Game {
     this.#createArray();
     this.#handleChange();
 
-
-    document.getElementById("player1Name").innerText = player1Name
-    document.getElementById("player2Name").innerText = player2Name
+    document.getElementById("player1Name").innerText = player1Name;
+    document.getElementById("player2Name").innerText = player2Name;
 
     // console.log(this.arrayGame);
-    
-
   }
 
-  
-
-
+  // #createLearderboard(){
+  //   const leaderboardData = localStorage
+  // }
 
   #handleScore() {
-    const blueScore = this.arrayGame
+    this.blueScore = this.arrayGame
       .flat()
       .filter((item) => item.owner == "blue")
       .map((item) => {
@@ -48,10 +45,7 @@ class Game {
       })
       .reduce((prev, curr) => prev + curr, 0);
 
-
-
-
-    const redScore = this.arrayGame
+    this.redScore = this.arrayGame
       .flat()
       .filter((item) => item.owner == "red")
       .map((item) => {
@@ -59,8 +53,8 @@ class Game {
       })
       .reduce((prev, curr) => prev + curr, 0);
 
-    this.elScore0.innerText = redScore;
-    this.elScore1.innerText = blueScore;
+    this.elScore0.innerText = this.redScore;
+    this.elScore1.innerText = this.blueScore;
   }
 
   /** @param {HTMLDivElement} hexa  */
@@ -71,7 +65,6 @@ class Game {
     const src = hexa.childNodes[1].src;
 
     const arrayNeighbor = [];
-    
 
     const directionsEvenR = [
       [-1, 0], // Atas kiri
@@ -119,7 +112,6 @@ class Game {
 
   /** @param {Array} position  */
   #changeNeighborHexa(click, position) {
-
     // console.log(position);
     for (let i = 0; i < position.length; i++) {
       if (this.arrayGame[position[i][0]][position[i][1]].isActive) {
@@ -148,8 +140,7 @@ class Game {
         }
       }
     }
-    this.#handleScore()
-
+    this.#handleScore();
   }
 
   /** @param {HTMLDivElement} hexa  */
@@ -238,7 +229,7 @@ class Game {
       }
       this.#handleChange(hexa); // <-- random dan mengganti current hexa di htmlnya
       this.#detectHexa(hexa); // <-- Mengganti warna musuh jika angka lebih kecil
-      this.#detectEnd()
+      this.#detectEnd();
     });
   }
 
@@ -305,19 +296,36 @@ class Game {
     return hexa;
   }
 
-  #detectEnd(){
-    const allValuesNotNull = this.arrayGame.every(row => 
-      row.every(obj => obj.isActive || obj.isDisable)
+  #detectEnd() {
+    const allValuesNotNull = this.arrayGame.every((row) =>
+      row.every((obj) => obj.isActive || obj.isDisable)
     );
 
+    if (allValuesNotNull) {
+      document.getElementById("modal").classList.toggle("hidden");
+      document.getElementById("modal").classList.toggle("flex");
+      container.classList.toggle("hidden");
 
-    if(allValuesNotNull){
-      alert("You win")
+      this.#saveScore(
+        {
+          name: this.player1Name,
+          score: this.redScore,
+        },
+        {
+          name: this.player2Name,
+          score: this.blueScore,
+        }
+      );
     }
-
-
   }
-  
+
+  #saveScore(player1, player2) {
+    const time = new Date().getTime()
+    
+    localStorage.setItem(time.toString(), JSON.stringify({
+      player1, player2
+    }))
+  }
 
   draw() {
     for (let i = 0; i < this.row; i++) {
@@ -333,3 +341,4 @@ class Game {
 }
 
 
+// console.log([JSON.stringify(localStorage)]);

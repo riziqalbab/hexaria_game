@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   font-family: "Courier New", Courier, monospace;
-
 }
 button {
   background: linear-gradient(135deg, #ff7eb3, #ff758c);
@@ -90,13 +89,62 @@ form {
   justify-content: center;
 }
 
+#modal {
+  height: 100vh;
+  width: 100vw;
+  background: #242424;
+  color: wheat;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
-.boxSelectPlayer, .boxSelectLevel {
+.leaderboard {
+  background-color: #111;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+}
+.leaderboard h2 {
+  text-align: center;
+}
+.sort {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+select {
+  padding: 5px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.match {
+  background-color: #222;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.match .details {
+  background-color: #ccc;
+  color: black;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boxSelectPlayer,
+.boxSelectLevel {
   display: flex;
   flex-direction: row;
   gap: 20px;
 }
-
 
 #instruction {
   animation-name: instructionAnimation;
@@ -141,6 +189,10 @@ form {
   display: flex;
   gap: 1px;
 }
+
+.game {
+  gap: 90px;
+}
 .hexa {
   position: relative;
   display: flex;
@@ -176,7 +228,7 @@ form {
   gap: 50px;
   display: flex;
 }
-#level_box{
+#level_box {
   color: wheat;
   font-family: "Courier New", Courier, monospace;
   background: #242424;

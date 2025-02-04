@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/x-icon" href="logo.png" />
   </head>
+
   <body>
     <div id="splashcreen" class="flex">
       <img src="logo.png" alt="" />
@@ -24,76 +25,148 @@
         </ul>
       </div>
     </div>
+
     <div id="competeTo" class="hidden">
-      <h2>COMPETE WITH</h1>
+      <h2>COMPETE WITH</h2>
       <div class="boxSelectPlayer">
-        
-        
-        
         <div class="select">
           <label for="bot">BOT</label>
-          <input type="radio" name="enemy" id="bot" value="bot" onclick="handlePlayer(this)"/>
+          <input
+            type="radio"
+            name="enemy"
+            id="bot"
+            value="bot"
+            onclick="handlePlayer(this)"
+          />
         </div>
         <div class="select">
           <label for="player2">PLAYER</label>
-          <input type="radio" name="enemy" id="player2" value="player" onclick="handlePlayer(this)"/>
+          <input
+            type="radio"
+            name="enemy"
+            id="player2"
+            value="player"
+            onclick="handlePlayer(this)"
+          />
         </div>
-
       </div>
       <button type="button" disabled id="competeBtn">OKE</button>
     </div>
     <div id="multi_player_form" class="hidden player_name">
       <h2>Masukkan Nama Pemain</h2>
       <form>
-          <label for="player1">Player 1:</label>
-          <input type="text" class="inputPlayer" id="player1" name="player1" required>
-          
-          <label for="player2">Player 2:</label>
-          <input type="text" class="inputPlayer" id="player2" name="player2" required>
-          
-          <button type="button" onclick="chooseLevel(this, 'multi')">Lanjut</button>
+        <label for="player1">Player 1:</label>
+        <input
+          type="text"
+          class="inputPlayer"
+          id="player1"
+          name="player1"
+          required
+        />
+
+        <label for="player2">Player 2:</label>
+        <input
+          type="text"
+          class="inputPlayer"
+          id="player2"
+          name="player2"
+          required
+        />
+
+        <button type="button" onclick="chooseLevel(this, 'multi')">
+          Lanjut
+        </button>
       </form>
     </div>
+
     <div id="single_player_form" class="hidden player_name">
       <h2>Lanjut</h2>
       <form>
-          <label for="single_player">Player 1:</label>
-          <input type="text" class="inputPlayer" id="single_player" name="player1" required>
-          <button type="button" onclick="chooseLevel(this, 'single')">Mulai Permainan</button>
+        <label for="single_player">Player 1:</label>
+        <input
+          type="text"
+          class="inputPlayer"
+          id="single_player"
+          name="player1"
+          required
+        />
+        <button type="button" onclick="chooseLevel(this, 'single')">
+          Mulai Permainan
+        </button>
       </form>
     </div>
-<div id="level_box" class="hidden">
-  <h2>SELECT LEVEL</h1>
-    <br>
-    <div class="boxSelectLevel">
-      <div class="select">
-        <label for="easy">EASY</label>
-        <input type="radio" name="level" id="easy" value="easy" onclick="handleLevel(this)"/>
-      </div>
-      <div class="select">
-        <label for="medium">MEDIUM</label>
-        <input type="radio" name="level" id="medium" value="medium" onclick="handleLevel(this)" />
-      </div>
-      <div class="select">
-        <label for="hard">HARD</label>
-        <input type="radio" name="level" onclick="handleLevel(this)" id="hard" value="hard" />
-      </div>
 
+    <div id="level_box" class="hidden">
+      <h2>SELECT LEVEL</h2>
+      <br />
+      <div class="boxSelectLevel">
+        <div class="select">
+          <label for="easy">EASY</label>
+          <input
+            type="radio"
+            name="level"
+            id="easy"
+            value="easy"
+            onclick="handleLevel(this)"
+          />
+        </div>
+        <div class="select">
+          <label for="medium">MEDIUM</label>
+          <input
+            type="radio"
+            name="level"
+            id="medium"
+            value="medium"
+            onclick="handleLevel(this)"
+          />
+        </div>
+        <div class="select">
+          <label for="hard">HARD</label>
+          <input
+            type="radio"
+            name="level"
+            onclick="handleLevel(this)"
+            id="hard"
+            value="hard"
+          />
+        </div>
+      </div>
+      <br />
+      <button type="button" disabled id="levelBtn" onclick="startGame(this)">
+        MULAI
+      </button>
     </div>
-    <br>
-    <button type="button" disabled id="levelBtn" onclick="startGame(this)">MULdfskjdfdfsndfAI</button>
-  </div>
-</div>
 
-    </div>
     <div class="container hidden" id="container">
-      <div id="gamebox">
-        <!-- <div class="column">
-                <div class="hexa">
-                    <img class="hexa" src="./img/black.png" alt="">
-                    <span class="nomor_hexa">20</span>
-                </div>
+      <div class="game flex">
+        <div id="gamebox">
+          <!-- <div class="column">
+                    <div class="hexa">
+                        <img class="hexa" src="./img/black.png" alt="">
+                        <span class="nomor_hexa">20</span>
+                    </div>
+                </div> -->
+        </div>
+        <div>
+          <div class="leaderboard">
+            <h2>Leaderboard</h2>
+            <div class="sort">
+              <!-- <span>Sort by :</span>
+              <select>
+                <option>Date</option>
+                <option>Score</option>
+              </select>
             </div> -->
+            <div class="match">
+              <div>
+                <strong>Budi vs Irfan</strong><br />
+                48 - 32
+              </div>
+              <button class="details">Detail</button>
+            </div>
+            
+          </div>
+        </div>
       </div>
       <div class="boxCurrent">
         <p>CURRENT:</p>
@@ -120,9 +193,12 @@
       </div>
     </div>
 
-    
+    <div id="modal" class="hidden">
+      <h1>YOU WON</h1>
+      <button type="button" onclick="window.location.reload()">BACK</button>
+    </div>
 
-    <script  src="game.js"></script>
+    <script src="game.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
