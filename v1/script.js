@@ -17,6 +17,9 @@ const inputPlayer2 = document.getElementById("player2");
 const multiPlayerForm = document.getElementById("multi_player_form");
 const singlePlayerForm = document.getElementById("single_player_form");
 const competeBtn = document.getElementById("competeBtn");
+const elLeaderboard = document.getElementById("leaderboard");
+
+
 
 function storeCurrent() {
   // const current_object = {
@@ -53,12 +56,12 @@ function startGame(el) {
     elScore1,
     disabledHexa,
     player1Name,
-    player2Name
+    player2Name,
+    elLeaderboard
   );
 
   game.draw();
 }
-
 start();
 
 function start() {

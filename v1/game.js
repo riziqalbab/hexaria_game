@@ -10,7 +10,8 @@ class Game {
     elScore1,
     disable = 0,
     player1Name,
-    player2Name
+    player2Name,
+    elLeaderboard
   ) {
     this.boxEl = boxEl;
     this.column = column;
@@ -23,12 +24,14 @@ class Game {
     this.disable = disable;
     this.player1Name = player1Name;
     this.player2Name = player2Name;
+    this.elLeaderboard = elLeaderboard;
     this.#createArray();
     this.#handleChange();
 
     document.getElementById("player1Name").innerText = player1Name;
     document.getElementById("player2Name").innerText = player2Name;
 
+    this.#showLeaderboard();
     // console.log(this.arrayGame);
   }
 
@@ -320,11 +323,49 @@ class Game {
   }
 
   #saveScore(player1, player2) {
-    const time = new Date().getTime()
-    
-    localStorage.setItem(time.toString(), JSON.stringify({
-      player1, player2
-    }))
+    const time = new Date().getTime();
+
+    localStorage.setItem(
+      time.toString(),
+      JSON.stringify({
+        player1,
+        player2,
+      })
+    );
+  }
+
+  #showLeaderboard() {
+    const leaderboard = Object.keys(localStorage)
+      .map((key) => ({
+        key: key,
+        value: localStorage.getItem(key),
+      }))
+      .sort((a, b) => a.key - b.key);
+
+    this.elBoardSCore;
+    // const div = ;
+
+    leaderboard.forEach((item) => {
+
+      const player1Name = JSON.parse(item.value).player1.name
+      const player2Name = JSON.parse(item.value).player2.name      
+
+      const player2Score = JSON.parse(item.value).player2.score;
+      const player1Score = JSON.parse(item.value).player1.score;
+
+
+      const div = document.createElement("div");
+      div.classList.add("match");
+      div.innerHTML = `
+      <div>
+                <span>
+                  <strong>${player1Name} ${player2Name}</strong><br />
+                ${player1Score} - ${player2Score}
+                </span>
+              </div>
+      `;
+      this.elLeaderboard.appendChild(div);
+    });
   }
 
   draw() {
@@ -339,6 +380,3 @@ class Game {
     }
   }
 }
-
-
-// console.log([JSON.stringify(localStorage)]);
